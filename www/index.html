@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Backoffice</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST" action="/save">
+            <label for="message">Message :</label>
+            <textarea type="text" id="message" rows="10" name="message" placeholder="Entrez votre message..." ></textarea>
+            <label for="max_people">Nombre de personnes admises en simultanées :</label>
+            <input type="number" id="max_people" name="max_people" value="10"/>
+            <div class="button-wrapper">
+                <button type="submit">Enregistrer</button>
+            </div>
+        </form>
+        <form method="POST" action="/traitement">
+            <label for="img">Lien de l'image :</label>
+            <input id="img" type="text" name="img">
+            <div class="button-wrapper">
+                <button type="submit" >Traitement de l'image</button>
+            </div>
+        </form>
+        
+        <script>
+            fetch("/settings").then(res => res.json()).then(data => {
+                document.getElementById('message').value = data.message
+                document.getElementById('max_people').value = data.max_people
+            })
+
+        </script>
+    </div>
+</body>
+
+</html>
